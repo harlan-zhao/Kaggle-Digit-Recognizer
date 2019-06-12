@@ -11,15 +11,22 @@ x_test = np.array(x_test).reshape(-1,28,28,1)
 model = tf.keras.models.load_model("CNN_1")
 predictions = model.predict(x_test)
 
-n=1
-ID = []
-Label = []
-for line in predictions:
-    ID.append(n)
-    Label.append(np.argmax(line))
-    n+=1
-res = pd.DataFrame()
-res["ImageId"] = ID
-res["Label"] = Label
+results = np.argmax(predictions,axis=1)
+results = pd.Series(results,name="Label")
+submission = pd.concat([pd.Series(range(1,28001),name = "ImageId"),results],axis=1)
+submission.to_csv("CNN_Submission.csv",index=False)
 
-res.to_csv("CNN.csv")
+
+
+# n=1
+# ID = []
+# Label = []
+# for line in predictions:
+#     ID.append(n)
+#     Label.append(np.argmax(line))
+#     n+=1
+# res = pd.DataFrame()
+# res["ImageId"] = ID
+# res["Label"] = Label
+#
+# res.to_csv("CNN.csv")
