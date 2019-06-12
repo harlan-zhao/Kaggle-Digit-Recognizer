@@ -1,5 +1,5 @@
 # Kaggle-Mnist
-Kaggle competition Mnist
+Kaggle competition Digit-Recognizer(Mnist)
 
 # NN
 95% Accuracy
